@@ -10,7 +10,7 @@ const moment = require("moment")
 // client.connect({ token: process.env.DISCORD_KEY });
 
 
-    
+
 // every 24hrs collect all upcoming drop into collections.json
 // check release date to see if the collections will drop within 7 days (or 24 hrs?)
 // if releasing soon collection the image urls from collection data set
@@ -24,104 +24,107 @@ const moment = require("moment")
 //                 return collection.image_url; // returns image url if found
 //             }
 //         })
-        
+
 //     })
 // }
 
-const postDropToDiscord = async (drop) => {
+const postDropToDiscord = (drop, urgency) => {
     let dateNow = new Date();
     let timeNow = dateNow.toLocaleTimeString();
-    const parsedDiscordUrl = drop.Discord.match('https://') || 
-                             drop.Discord.match('http://') ? 
-                             drop.Discord : 
-                             "https://discord.gg/" + drop.Discord.split('/')[1] || '';
 
-    try {
-        console.log(drop)
-        await axios.post("https://discord.com/api/webhooks/922286674564755466/2kwYz-4QlhE5iHv6Z6YnZInOVHjnXxrNh-U-8B8kVuMlsvdn57MP7tpXCXxx6fay6eJ2", {
-            "tts": false,
-            "embeds": [
-                {
-                    "title": `> __${drop.Project || " "}__`, 
-                    "description": `${ drop['Short Description'] || drop.Project}`,
-                    "url": `${drop.Website}`,
-                    "color": 70113288,
-                    "fields": [
-                        {
-                            name: `Launch Date:`,
-                            value: `${moment(drop['Sale Date']).from(moment(dateNow).toDate())}`,
-                            inline: false
-                        },
-                        {
-                            name: `Twitter:`,
-                            value: `https://twitter.com/${drop.TwitterId || " "}`,
-                            inline: false
-                        },
-                        {
-                            name: `Discord:`,
-                            value: `${parsedDiscordUrl}`,
-                            inline: false
-                        },
-                        {
-                            name: `Currency:`,
-                            value: `${drop.Currency || "N/A"}`,
-                            inline: true
-                        },
-                        {
-                            name: `Price:`,
-                            value: `${drop.Price || ''}`,
-                            inline: true
-                        },
-                        {
-                            name: `Max Items:`,
-                            value: `${drop['Max Items'] || ''}`,
-                            inline: false
-                        }
-                    ],
-                    "author": {
-                        name: "NFT Assassin",
-                        icon_url: "https://cdn.discordapp.com/app-icons/812522825200959518/ad50c7a29b317455c6a8f94600c74636.png?size=256"
-                    },
-                    "footer": {
-                        text: `${timeNow} [PST] - Data sourced from https://rarity.tools`,
-                        icon_url: 'https://icons-for-free.com/iconfiles/png/256/access+time+24px-131985216670620016.png'
-                    }
-                }
-            ]
-        });
-    } catch (error) {
-        console.log("Error: " + JSON.stringify(error.response.data));
-        return error.response;
-    }
+    // const parsedDiscordUrl = drop.Discord.match('https://') ||
+    //     drop.Discord.match('http://') ?
+    //     drop.Discord :
+    //     "https://discord.gg/" + drop.Discord.split('/')[1] || '';
+
+    const parsedWebsiteLink = drop.Website ? drop.Website.match('https://') ||
+    drop.Website.match('http://') ?
+    drop.Website :
+    "https://" + drop.Website :
+    "";
+
+
+    console.log(drop);
+    console.log(parsedWebsiteLink);
+
+    axios.post("https://discord.com/api/webhooks/922286674564755466/2kwYz-4QlhE5iHv6Z6YnZInOVHjnXxrNh-U-8B8kVuMlsvdn57MP7tpXCXxx6fay6eJ2", {
+        "username": "NFT Assassin",
+        "avatar_url": "https://i.imgur.com/4M34hi2.png",
+        "embeds": [
+          {
+            "author": {
+              "name": "Upcoming NFT Notification",
+              "icon_url": "https://png.pngitem.com/pimgs/s/521-5212547_vaporwave-purple-bart-bartsimpson-simpsons-aesthetic-profile-picture.png"
+            },
+            "title": drop.Project,
+            "url": parsedWebsiteLink,
+            "description": "*" + drop["Short Description"] + "*",
+            "color": urgency == "‼️" ? 13041721 : urgency == "❗" ? 15258703 : 3382271,
+            "fields": [
+              {
+                "name": "Launch:",
+                "value": "___**" + moment(drop['Sale Date']).from(moment(dateNow).toDate()) + "**___"
+              },
+              {
+                "name": "Twitter:",
+                "value": "https://twitter.com/" + drop.TwitterId
+              },
+              {
+                "name": "Discord:",
+                "value": drop.Discord ? drop.Discord : "None"
+              },
+              {
+                "name": "Price:",
+                "value": drop.Price + (drop.Currency ? " **" + drop.Currency + "**" : " **ETH**"),
+                "inline": true
+              },
+              {
+                "name": "Max Items:",
+                "value":  drop["Max Items"],
+                "inline": true
+              }
+            ],
+            "image": {
+              "url": "https://upload.wikimedia.org/wikipedia/commons/5/5a/A_picture_from_China_every_day_108.jpg"
+            },
+            "footer": {
+              "text": "Data sourced from https://rarity.tools",
+              "icon_url": "https://pbs.twimg.com/profile_images/1386583814332305412/BeKFg2UJ_400x400.jpg"
+            }
+          }
+        ]
+      }, )
 }
 
 const filterNewestFromData = (list, current) => {
-        if(current === list.length) return;
-        
-        let dayToday;
-        let launchDay;
-        let launchMonth;
-        
-        if(list[current]['Sale Date']) {
-            dayToday = parseInt(JSON.stringify(moment()).split('T')[0].split('-')[2]);
-            launchDay = parseInt(list[current]['Sale Date'].split('T')[0].split('-')[2]);
-            launchMonth = parseInt(list[current]['Sale Date'].split('-')[1].split('-')[0]);
+    if (current === list.length) return;
+
+    let dayToday;
+    let launchDay;
+    let launchMonth;
+
+    if (list[current]['Sale Date']) {
+        dayToday = parseInt(JSON.stringify(moment()).split('T')[0].split('-')[2]);
+        launchDay = parseInt(list[current]['Sale Date'].split('T')[0].split('-')[2]);
+        launchMonth = parseInt(list[current]['Sale Date'].split('-')[1].split('-')[0]);
+    }
+
+    if (parseInt(moment().month()) + 1 === launchMonth || (parseInt(moment().month()) + 1 === 12 ? 0 : parseInt(moment().month())) + 1 == launchMonth) {
+        // postDropToDiscord(list[current]);
+
+        if (dayToday + 1 === launchDay) { // LAUNCHES TODAY
+            postDropToDiscord(list[current], "‼️");
+        } else if (dayToday + 2 === launchDay) { // LAUNCHED TOMMORROW
+            postDropToDiscord(list[current], "❗");
+        } else if (dayToday + 1 <= launchDay && dayToday + 7 >= launchDay) { // Coming soon (greater than 7 days out)
+            postDropToDiscord(list[current]);
+        } else {
+            console.log("Coming soon");
         }
-        
-        if(parseInt(moment().month()) + 1 === launchMonth || (parseInt(moment().month()) + 1 === 12 ? 0 : parseInt(moment().month())) + 1 == launchMonth) {
-            if(dayToday + 1 === launchDay) { // LAUNCHES TODAY
-                postDropToDiscord(list[current]);
-            } else if (dayToday + 2 === launchDay) { // LAUNCHED TOMMORROW
-                postDropToDiscord(list[current]);
-            } else if (dayToday + 1 <= launchDay && dayToday + 7 >= launchDay) { // Coming soon (greater than 7 days out)
-                postDropToDiscord(list[current]);
-            } else {
-                console.log("Coming soon");
-            }
-        }
-        setTimeout(() => {
-            filterNewestFromData(list, current + 1);
-        }, 1200);
+    }
+    setTimeout(() => {
+        filterNewestFromData(list, current + 1);
+    }, 1800);
     return true;
 }
 
@@ -156,19 +159,19 @@ const buildUpcoming = () => {
             getDataForUpcomingDrops();
         });
     }).catch((err) => {
-        if (err) 
+        if (err)
             console.error(err);
     });
 }
 
-    
-fs.stat("./data/collections.json", function(err, stats) {
+
+fs.stat("./data/collections.json", function (err, stats) {
     if (err)
         console.log(err)
-    
+
     var mtime = stats.mtimeMs;
     console.log(mtime, Date.now() + 86400000);
-    if(mtime < Date.now() + 86400000) {
+    if (mtime < Date.now() + 86400000) {
         // logNewDropToDiscord();
         buildUpcoming();
     } else {
