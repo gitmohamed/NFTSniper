@@ -62,7 +62,7 @@ const postDropToDiscord = (drop, urgency) => {
               },
               {
                 "name": "Price:",
-                "value": drop.Price + (drop.Currency ? " **" + drop.Currency + "**" : drop.Price.match("ETH") ? "" : " **ETH**"),
+                "value": (drop.Price || drop["Price Text"] ? drop.Price || drop["Price Text"] : "0") + (drop.Currency ? " **" + drop.Currency + "**" : drop.Price.match("ETH") ? "" : " **ETH**"),
                 "inline": true
               },
               {
@@ -104,7 +104,7 @@ const filterNewestFromData = (list, current) => {
         } else if (dayToday + 1 <= launchDay && dayToday + 7 >= launchDay) { // Coming soon (greater than 7 days out)
             postDropToDiscord(list[current]);
         } else {
-            console.log(list[current].Project + " Coming soon");
+            console.log(list[current].Project + " Coming soon (More Than 7 days from now)");
         }
     }
     setTimeout(() => {
@@ -158,11 +158,11 @@ const init = () => {
         var mtime = stats.mtimeMs;
         if (mtime < Date.now() + 86400000) {
             buildUpcoming();
-            // listen indefinitely rebooting every 17 hours
+            // listen indefinitely rebooting every 2 minutes
             setTimeout(() => {
                 console.log("Rebooting NFT Tracker...");
                 init();
-            }, 3400 * 60000);
+            }, 2 * 60000);
         } else {
             console.log("Already ran");
         }
