@@ -4,7 +4,7 @@ const fs = require("fs")
 const axios = require("axios")
 const moment = require("moment")
 // const Discordie = require("discordie")
-
+const config = require('./config')
 // const client = new Discordie({ autoReconnect: true});
 
 // client.connect({ token: process.env.DISCORD_KEY });
@@ -13,20 +13,8 @@ const moment = require("moment")
 
 // every 24hrs collect all upcoming drop into collections.json
 // check release date to see if the collections will drop within 7 days (or 24 hrs?)
-// if releasing soon collection the image urls from collection data set
+// if releasing soon collection the image urls from collection data set *Pending
 // Log the upcoming collection data to disord channel
-
-// const getImageLinkForDrop = (id) => {
-//     axios.get('https://collections.rarity.tools/collectionsStats').then((data) => {
-//         data.data.forEach(collection => {
-//             console.log(collection.slug, id)
-//             if(collection.slug === id) {
-//                 return collection.image_url; // returns image url if found
-//             }
-//         })
-
-//     })
-// }
 
 const postDropToDiscord = (drop, urgency) => {
     let dateNow = new Date();
@@ -43,11 +31,10 @@ const postDropToDiscord = (drop, urgency) => {
     "https://" + drop.Website :
     "";
 
-
     console.log(drop);
     console.log(parsedWebsiteLink);
 
-    axios.post("https://discord.com/api/webhooks/922286674564755466/2kwYz-4QlhE5iHv6Z6YnZInOVHjnXxrNh-U-8B8kVuMlsvdn57MP7tpXCXxx6fay6eJ2", {
+    axios.post(config.Webhook, {
         "username": "NFT Assassin",
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
         "embeds": [
@@ -75,7 +62,7 @@ const postDropToDiscord = (drop, urgency) => {
               },
               {
                 "name": "Price:",
-                "value": drop.Price + (drop.Currency ? " **" + drop.Currency + "**" : " **ETH**"),
+                "value": drop.Price + (drop.Currency ? " **" + drop.Currency + "**" : drop.Price.match("ETH") ? "" : " **ETH**"),
                 "inline": true
               },
               {
@@ -110,8 +97,6 @@ const filterNewestFromData = (list, current) => {
     }
 
     if (parseInt(moment().month()) + 1 === launchMonth || (parseInt(moment().month()) + 1 === 12 ? 0 : parseInt(moment().month())) + 1 == launchMonth) {
-        // postDropToDiscord(list[current]);
-
         if (dayToday + 1 === launchDay) { // LAUNCHES TODAY
             postDropToDiscord(list[current], "‼️");
         } else if (dayToday + 2 === launchDay) { // LAUNCHED TOMMORROW
@@ -119,12 +104,12 @@ const filterNewestFromData = (list, current) => {
         } else if (dayToday + 1 <= launchDay && dayToday + 7 >= launchDay) { // Coming soon (greater than 7 days out)
             postDropToDiscord(list[current]);
         } else {
-            console.log("Coming soon");
+            console.log(list[current].Project + " Coming soon");
         }
     }
     setTimeout(() => {
         filterNewestFromData(list, current + 1);
-    }, 1800);
+    }, 1500);
     return true;
 }
 
@@ -153,11 +138,11 @@ const buildUpcoming = () => {
         });
         return (json);
     }).then((data) => {
-        // console.log(data);
-        fs.writeFile("./data/collections.json", JSON.stringify(data), () => {
-            console.log('Wrote to file');
-            getDataForUpcomingDrops();
-        });
+        filterNewestFromData(data, 0);
+        // fs.writeFile("./data/collections.json", JSON.stringify(data), () => {
+        //     console.log('Wrote to file');
+        //     getDataForUpcomingDrops();
+        // });
     }).catch((err) => {
         if (err)
             console.error(err);
@@ -165,16 +150,23 @@ const buildUpcoming = () => {
 }
 
 
-fs.stat("./data/collections.json", function (err, stats) {
-    if (err)
-        console.log(err)
+const init = () => {
+    fs.stat("./data/collections.json", function (err, stats) {
+        if (err)
+            console.log(err)
 
-    var mtime = stats.mtimeMs;
-    console.log(mtime, Date.now() + 86400000);
-    if (mtime < Date.now() + 86400000) {
-        // logNewDropToDiscord();
-        buildUpcoming();
-    } else {
-        console.log("Not");
-    }
-});
+        var mtime = stats.mtimeMs;
+        if (mtime < Date.now() + 86400000) {
+            buildUpcoming();
+            // listen indefinitely rebooting every 17 hours
+            setTimeout(() => {
+                console.log("Rebooting NFT Tracker...");
+                init();
+            }, 3400 * 60000);
+        } else {
+            console.log("Already ran");
+        }
+    });
+}
+
+init();
