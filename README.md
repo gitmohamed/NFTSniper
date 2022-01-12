@@ -168,8 +168,6 @@ Mohamed Hassan - [@themohamedlife](https://twitter.com/themohamedlife) - mohamed
 
 Project Link: [https://github.com/gitmohamed/NFTSniper](https://github.com/gitmohamed/NFTSniper)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- ACKNOWLEDGMENTS -->
@@ -183,8 +181,6 @@ Use this space to list resources you find helpful and would like to give credit 
 * [Malven's Grid Cheatsheet](https://grid.malven.co/)
 * [Img Shields](https://shields.io)
 * [GitHub Pages](https://pages.github.com) -->
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
