@@ -1,9 +1,9 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
+  <!-- <a href="https://github.com/othneildrew/Best-README-Template">
     <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+  </a> -->
 
   <h3 align="center">NFT Sniper</h3>
 
@@ -105,7 +105,7 @@ _Below is an example of how you can instruct your audience on installing and set
    let config = {};
    config.Webhook = "WEBHOOK URL HERE";
 
-    module.exports = config;
+   module.exports = config;
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -135,7 +135,7 @@ See the [open issues](https://github.com/gitmohamed/NFTSniper/issues) for a full
 
 
 <!-- CONTRIBUTING -->
-## Contributing
+<!-- ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -148,7 +148,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<p align="right">(<a href="#top">back to top</a>)</p> -->
 
 
 
@@ -166,14 +166,14 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Mohamed Hassan - [@themohamedlife](https://twitter.com/themohamedlife) - mohamedhdesign@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/gitmohamed/NFTSniper](https://github.com/gitmohamed/NFTSniper)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+<!-- ## Acknowledgments
 
 Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
@@ -182,7 +182,7 @@ Use this space to list resources you find helpful and would like to give credit 
 * [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
 * [Malven's Grid Cheatsheet](https://grid.malven.co/)
 * [Img Shields](https://shields.io)
-* [GitHub Pages](https://pages.github.com)
+* [GitHub Pages](https://pages.github.com) -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -202,4 +202,4 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: ./nftsniper-screen.PNG
+[product-screenshot]: https://github.com/gitmohamed/NFTSniper/blob/master/nftsniper-screen.PNG

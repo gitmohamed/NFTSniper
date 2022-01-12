@@ -35,7 +35,7 @@ const postDropToDiscord = (drop, urgency) => {
     console.log(parsedWebsiteLink);
 
     axios.post(config.Webhook, {
-        "username": "NFT Assassin",
+        "username": "NFT Sniper",
         "avatar_url": "https://i.imgur.com/4M34hi2.png",
         "embeds": [
           {
