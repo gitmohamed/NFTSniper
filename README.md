@@ -54,7 +54,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/gitmohamed/NFTSniper)
 
 Upcoming NFT releases straight to your discord channel, sourced from rarity.tools.
 
@@ -202,4 +202,4 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
-[product-screenshot]: nftsniper-screen.png
+[product-screenshot]: ./nftsniper-screen.PNG
