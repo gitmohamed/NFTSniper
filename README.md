@@ -56,20 +56,13 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/gitmohamed/NFTSniper)
 
-Simply add your discord webhook url in the `config.js` file, run the program by 
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
+Simply add your discord webhook url in the `config.js` file and run the program.
+Collections will be logged if drop is within `24hrs`, `48hrs` or within `7 days` respectively. 
 
 ### Built With
 
 * [Node.js](https://nodejs.org/)
 * [Discord](https://discord.com/developers/docs/resources/webhook)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -133,6 +126,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [ ] Realtime Tracking
+- [ ] Configurable drop date tracking [default: 1 day, 2 days & within 7 days]
 
 See the [open issues](https://github.com/gitmohamed/NFTSniper/issues) for a full list of proposed features (and known issues).
 
@@ -170,7 +164,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Mohamed Hassan - [@themohamedlife](https://twitter.com/themohamedlife) - mohamedhdesign@gmail.com
+[@themohamedlife](https://twitter.com/themohamedlife) - mohamedhdesign@gmail.com
 
 Project Link: [https://github.com/gitmohamed/NFTSniper](https://github.com/gitmohamed/NFTSniper)
 
