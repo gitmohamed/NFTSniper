@@ -56,15 +56,13 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://github.com/gitmohamed/NFTSniper)
 
-Upcoming NFT releases straight to your discord channel, sourced from rarity.tools.
+Simply add your discord webhook url in the `config.js` file, run the program by 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
 * [Node.js](https://nodejs.org/)
 * [Discord](https://discord.com/developers/docs/resources/webhook)
@@ -106,6 +104,14 @@ _Below is an example of how you can instruct your audience on installing and set
    config.Webhook = "WEBHOOK URL HERE";
 
    module.exports = config;
+   ```
+5. Run the program by typing
+   ```sh
+   yarn start
+
+   OR
+
+   npm start
    ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
