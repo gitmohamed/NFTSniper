@@ -32,7 +32,6 @@ const postDropToDiscord = (drop, urgency) => {
     "";
 
     console.log(drop);
-    console.log(parsedWebsiteLink);
 
     axios.post(config.Webhook, {
         "username": "NFT Sniper",
@@ -62,7 +61,7 @@ const postDropToDiscord = (drop, urgency) => {
               },
               {
                 "name": "Price:",
-                "value": (drop.Price || drop["Price Text"] ? drop.Price || drop["Price Text"] : "0") + (drop.Currency ? " **" + drop.Currency + "**" : drop.Price.match("ETH") ? "" : " **ETH**"),
+                "value": (drop.Price || drop["Price Text"] ? drop.Price || drop["Price Text"] : "0") + (drop.Currency ? " **" + drop.Currency + "**" : " **ETH**"),
                 "inline": true
               },
               {
@@ -109,7 +108,7 @@ const filterNewestFromData = (list, current) => {
     }
     setTimeout(() => {
         filterNewestFromData(list, current + 1);
-    }, 1500);
+    }, 2300);
     return true;
 }
 
@@ -158,11 +157,11 @@ const init = () => {
         var mtime = stats.mtimeMs;
         if (mtime < Date.now() + 86400000) {
             buildUpcoming();
-            // listen indefinitely rebooting every 2 minutes
+            // listen indefinitely rebooting every 2400 minutes (12 hours)
             setTimeout(() => {
                 console.log("Rebooting NFT Tracker...");
                 init();
-            }, 2 * 60000);
+            }, 2400 * 60000);
         } else {
             console.log("Already ran");
         }

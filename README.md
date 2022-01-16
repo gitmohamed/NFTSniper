@@ -82,23 +82,22 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/gitmohamed/NFTSniper.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    npm install
    ```
-4. Enter your Webhook URL in `config.js`
+3. Enter your Webhook URL in `config.js`
    ```js
    let config = {};
    config.Webhook = "WEBHOOK URL HERE";
 
    module.exports = config;
    ```
-5. Run the program by typing
+4. Run the program by typing
    ```sh
    yarn start
 
