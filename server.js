@@ -3,15 +3,10 @@
 const fs = require("fs")
 const axios = require("axios")
 const moment = require("moment")
-// const Discordie = require("discordie")
 const config = require('./config')
-// const client = new Discordie({ autoReconnect: true});
-
-// client.connect({ token: process.env.DISCORD_KEY });
 
 
-
-// every 24hrs collect all upcoming drop into collections.json
+// every 12hrs collect all upcoming drop into collections.json
 // check release date to see if the collections will drop within 7 days (or 24 hrs?)
 // if releasing soon collection the image urls from collection data set *Pending
 // Log the upcoming collection data to disord channel
@@ -112,36 +107,17 @@ const filterNewestFromData = (list, current) => {
     return true;
 }
 
-
-const getDataForUpcomingDrops = () => {
-    try {
-        fs.readFile("./data/collections.json", async (err, res) => {
-            let list = await JSON.parse(res)
-            if (err)
-                console.log(err)
-            filterNewestFromData(list, 0);
-        });
-    } catch (error) {
-        console.error(error)
-    }
-}
-
 const buildUpcoming = () => {
     console.log("Building upcoming drop data set..");
     let json = [];
     // function that returns all upcoming NFT drops 
     axios.get('https://collections.rarity.tools/upcoming2').then((res) => {
         res.data.forEach(collection => {
-            // console.log(collection); // data set for collection detailed info/image urls
             json.push(collection);
         });
         return (json);
     }).then((data) => {
         filterNewestFromData(data, 0);
-        // fs.writeFile("./data/collections.json", JSON.stringify(data), () => {
-        //     console.log('Wrote to file');
-        //     getDataForUpcomingDrops();
-        // });
     }).catch((err) => {
         if (err)
             console.error(err);
@@ -157,11 +133,11 @@ const init = () => {
         var mtime = stats.mtimeMs;
         if (mtime < Date.now() + 86400000) {
             buildUpcoming();
-            // listen indefinitely rebooting every 2400 minutes (12 hours)
+            // listen indefinitely, rebooting every 720 minutes (12 hours)
             setTimeout(() => {
                 console.log("Rebooting NFT Tracker...");
                 init();
-            }, 2400 * 60000);
+            }, 720 * 60000);
         } else {
             console.log("Already ran");
         }
