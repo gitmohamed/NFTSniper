@@ -83,14 +83,17 @@ This is an example of how to list things you need to use the software and how to
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
 1. Clone the repo
+
    ```sh
    git clone https://github.com/gitmohamed/NFTSniper.git
    ```
 2. Install NPM packages
+
    ```sh
    npm install
    ```
-3. Enter your Webhook URL in `config.js`
+3. Create `config.js`, copy this code and enter your discord channel's Webhook URL
+
    ```js
    let config = {};
    config.Webhook = "WEBHOOK URL HERE";
