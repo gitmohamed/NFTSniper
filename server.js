@@ -10,15 +10,11 @@ const config = require('./config')
 // check release date to see if the collections will drop within 7 days (or 24 hrs?)
 // if releasing soon collection the image urls from collection data set *Pending
 // Log the upcoming collection data to disord channel
+// Project Link: https://github.com/gitmohamed/NFTSniper
 
 const postDropToDiscord = (drop, urgency) => {
     let dateNow = new Date();
     let timeNow = dateNow.toLocaleTimeString();
-
-    // const parsedDiscordUrl = drop.Discord.match('https://') ||
-    //     drop.Discord.match('http://') ?
-    //     drop.Discord :
-    //     "https://discord.gg/" + drop.Discord.split('/')[1] || '';
 
     const parsedWebsiteLink = drop.Website ? drop.Website.match('https://') ||
     drop.Website.match('http://') ?

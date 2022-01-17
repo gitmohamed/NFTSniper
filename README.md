@@ -57,30 +57,26 @@
 [![Product Name Screen Shot][product-screenshot]](https://github.com/gitmohamed/NFTSniper)
 
 Simply add your discord webhook url in the `config.js` file and run the program.
-Collections will be logged if drop is within `24hrs`, `48hrs` or within `7 days` respectively. 
-
+Collections will be logged if the collection's release date is within `24hrs`, `48hrs` or within `7 days` respectively. 
+<!-- 
 ### Built With
 
-* [Node.js](https://nodejs.org/)
-* [Discord](https://discord.com/developers/docs/resources/webhook)
+* [Discord](https://discord.com/developers/docs/resources/webhook) -->
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+This is a nodejs program that can run on any Windows or Linux machine. NFT Sniper can run indefinitely, querying data every 12 hours (default) or manually by starting and stopping.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+All you need is NodeJS installed globally and a discord channel to log upcoming NFt drops to.
+
+* [Download Node.js](https://nodejs.org/)
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+_To use this app follow the steps below._
 
 1. Clone the repo
 
@@ -129,6 +125,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 - [ ] Realtime Tracking
 - [ ] Configurable drop date tracking [default: 1 day, 2 days & within 7 days]
+- [ ] Configurable data set query interval
 
 See the [open issues](https://github.com/gitmohamed/NFTSniper/issues) for a full list of proposed features (and known issues).
 
