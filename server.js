@@ -51,8 +51,13 @@ const postDropToDiscord = (drop, urgency) => {
                 "value": drop.Discord ? drop.Discord : "None"
               },
               {
-                "name": "Price:",
-                "value": (drop.Price || drop["Price Text"] ? drop.Price || drop["Price Text"] : "0") + (drop.Currency ? " **" + drop.Currency + "**" : " **ETH**"),
+                "name": "Price:", // .replace(/[^0-9]/g, '') filters out letter chars from price string
+                "value": (drop.Price ? 
+                          drop["Price Text"] ? 
+                          drop["Price Text"].split('.').length > 1 ? 
+                          drop["Price Text"].replace(/[^0-9|\.$]/g, '').split('.').slice(0, 2).join('.') : 
+                          drop["Price Text"].replace(/[^0-9|\.$]/g, '') : 
+                          drop.Price.replace(/[^0-9|.$]/g, '') : "0") + (drop.Currency ? " **" + drop.Currency + "**" : " **ETH**"),
                 "inline": true
               },
               {

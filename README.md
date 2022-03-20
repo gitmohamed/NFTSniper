@@ -1,10 +1,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <!-- <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a> -->
-
   <h3 align="center">NFT Sniper</h3>
 
   <p align="center">
@@ -124,6 +120,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 ## Roadmap
 
 - [ ] Realtime Tracking
+- [ ] Preview images for each collection
 - [ ] Configurable drop date tracking [default: 1 day, 2 days & within 7 days]
 - [ ] Configurable data set query interval
 
