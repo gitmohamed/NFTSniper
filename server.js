@@ -52,12 +52,14 @@ const postDropToDiscord = (drop, urgency) => {
               },
               {
                 "name": "Price:", // .replace(/[^0-9]/g, '') filters out letter chars from price string
-                "value": (drop.Price ? 
-                          drop["Price Text"] ? 
-                          drop["Price Text"].split('.').length > 1 ? 
-                          drop["Price Text"].replace(/[^0-9|\.$]/g, '').split('.').slice(0, 2).join('.') : 
-                          drop["Price Text"].replace(/[^0-9|\.$]/g, '') : 
-                          drop.Price.replace(/[^0-9|.$]/g, '') : "0") + (drop.Currency ? " **" + drop.Currency + "**" : " **ETH**"),
+                "value": drop.Price ? drop.Price + `${drop.Currency ? "[**" + drop.Currency + "**]" : drop.Price.match(/[^0-9 |\.$]/g) ? "" : "[**ETH**]" }` : 
+                         drop["Price Text"] + `${drop.Currency ? "[**" + drop.Currency + "**]" : drop["Price Text"].match(/[^0-9 |\.$]/g) ? "" : "[**ETH**]" }`,
+                // "value": (drop.Price ? 
+                //           drop["Price Text"] ? 
+                //           drop["Price Text"].split('.').length > 1 ? 
+                //           drop["Price Text"].replace(/[^0-9|\.$]/g, '').split('.').slice(0, 2).join('.') : 
+                //           drop["Price Text"].replace(/[^0-9|\.$]/g, '') : 
+                //           drop.Price.replace(/[^0-9|.$]/g, '') : "0") + (drop.Currency ? "**" + drop.Currency + "**" : " **ETH**"),
                 "inline": true
               },
               {
